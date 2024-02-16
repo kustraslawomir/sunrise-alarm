@@ -1,0 +1,7 @@
+{
+  "app_name": "Sunrise Alarm",
+  "dark_mode": "Ciemny motyw",
+  "todays_sunrise_description" : "Dzisiejszy wschód słońca w {location} zacznie się o {time}",
+  "am" : "{time}"
+
+}

@@ -1,0 +1,6 @@
+{
+  "app_name": "Sunrise Alarm",
+  "dark_mode": "Dark mode",
+  "todays_sunrise_description": "Today's sunrise in {location} is at {time} AM",
+  "am": "{time} AM"
+}
