@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_theme_controller.dart';
+part of 'theme_mode_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeControllerHash() =>
-    r'18669c74e1f40c8de8d54769df92f8f4ae495a2d';
+String _$themeModeControllerHash() =>
+    r'be516cb206a5414c444f9a3c4b01be1aec3154f8';
 
-/// See also [AppThemeController].
-@ProviderFor(AppThemeController)
-final appThemeControllerProvider =
-    AutoDisposeNotifierProvider<AppThemeController, ThemeMode>.internal(
-  AppThemeController.new,
-  name: r'appThemeControllerProvider',
+/// See also [ThemeModeController].
+@ProviderFor(ThemeModeController)
+final themeModeControllerProvider =
+    AutoDisposeNotifierProvider<ThemeModeController, ThemeMode>.internal(
+  ThemeModeController.new,
+  name: r'themeModeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$appThemeControllerHash,
+      : _$themeModeControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AppThemeController = AutoDisposeNotifier<ThemeMode>;
+typedef _$ThemeModeController = AutoDisposeNotifier<ThemeMode>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

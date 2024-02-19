@@ -1,3 +1,5 @@
+import '../../../../domain/usecase/datetime/date_time_formatter.dart';
+
 class HomePageState {
   final DateTime? localSunriseDate;
 
@@ -19,5 +21,13 @@ class HomePageState {
         localSunriseDate: localSunriseDate ?? this.localSunriseDate,
         location: location ?? this.location,
         isLoading: isLoading ?? this.isLoading);
+  }
+
+  String localSunriseDateHHmm() {
+    final date = localSunriseDate;
+    if (date == null) {
+      throw Exception('local sunrise date is null');
+    }
+    return DateTimeFormatter.toHHmm(date);
   }
 }
