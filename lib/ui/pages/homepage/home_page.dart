@@ -4,10 +4,13 @@ import 'package:sunrise.alarm/ui/pages/drawer/drawer_page.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/alarm_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/home_page_state/home_page_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/alarm_schedule/alarm_schedule.dart';
+import 'package:sunrise.alarm/ui/pages/homepage/widget/set_alarm/set_alarm_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/spacing/vertical_spacing.dart';
+import 'package:sunrise.alarm/ui/theme/app_theme_extensions.dart';
 import 'package:sunrise.alarm/ui/widgets/loading_page.dart';
 
 import '../../theme/dimensions.dart';
+import '../../widgets/app_button.dart';
 import 'widget/alarm_time/alarm_time_radio_group.dart';
 import 'widget/app_bar/app_bar_title.dart';
 import 'widget/repeat_daily/repeat_daily.dart';
@@ -35,7 +38,7 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(homePageControllerProvider);
-    final alarmState = ref.watch(alarmTimeControllerProvider);
+    final alarmState = ref.watch(alarmControllerProvider);
     if (state.isLoading) {
       return const LoadingPage();
     }
@@ -53,8 +56,12 @@ class HomePageState extends ConsumerState<HomePage> {
                 const VerticalSpacing(),
                 const RepeatDaily(),
                 if (!alarmState.repeatDaily) const VerticalSpacing(),
-                if (!alarmState.repeatDaily) const AlarmSchedule()
+                if (!alarmState.repeatDaily) const AlarmSchedule(),
+                const Spacer(),
+                const SetAlarmButton()
               ],
             ))));
   }
+
+  _setAlarm() {}
 }

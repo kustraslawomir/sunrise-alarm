@@ -15,7 +15,7 @@ class DayOfWeekItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(alarmTimeControllerProvider.notifier);
+    final controller = ref.read(alarmControllerProvider.notifier);
 
     String label = '';
     switch (dayOfWeek) {

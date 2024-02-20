@@ -11,7 +11,7 @@ class AlarmSchedule extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(alarmTimeControllerProvider);
+    final state = ref.watch(alarmControllerProvider);
     const days = DayOfWeek.values;
     return SizedBox(
         height: Dimensions.dayOfTheWeekItemHeight,

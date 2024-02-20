@@ -12,5 +12,6 @@
   "thursday": "CZW",
   "friday": "PT",
   "saturday": "SO",
-  "sunday": "ND"
+  "sunday": "ND",
+  "done": "Gotowe"
 }

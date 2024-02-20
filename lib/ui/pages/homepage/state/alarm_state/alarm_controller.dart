@@ -7,7 +7,7 @@ import 'model/alarm_configuration_state.dart';
 part 'alarm_controller.g.dart';
 
 @riverpod
-class AlarmTimeController extends _$AlarmTimeController {
+class AlarmController extends _$AlarmController {
   @override
   AlarmConfigurationState build() => AlarmConfigurationState.defaultState();
 
@@ -32,5 +32,9 @@ class AlarmTimeController extends _$AlarmTimeController {
       schedule.add(dayOfWeek);
       state = state.copyWith(schedule: schedule);
     }
+  }
+
+  setAlarm() {
+    //todo
   }
 }

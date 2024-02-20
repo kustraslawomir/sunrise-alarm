@@ -6,8 +6,11 @@ abstract class AppTypography {
   static const String appFont = FontFamily.sora;
 
   static const bodyMedium = TextStyle(
-      fontSize: 16, fontFamily: appFont, fontWeight: FontWeight.normal);
+      fontSize: 14, fontFamily: appFont, fontWeight: FontWeight.normal);
 
-  static const title =
-      TextStyle(fontSize: 19, fontFamily: appFont, fontWeight: FontWeight.w800);
+  static const titleMedium =
+      TextStyle(fontSize: 18, fontFamily: appFont, fontWeight: FontWeight.w800);
+
+  static const labelMedium =
+      TextStyle(fontSize: 14, fontFamily: appFont, fontWeight: FontWeight.w800);
 }

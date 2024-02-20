@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
-import 'app_text_extension.dart';
-import 'app_theme.dart';
-
-extension AppThemeExtension on ThemeData {
-  AppTextThemeExtension get appTextTheme =>
-      extension<AppTextThemeExtension>() ?? AppTheme.lightTextTheme;
-}
 
 extension ThemeGetter on BuildContext {
   // Usage example: `context.theme`

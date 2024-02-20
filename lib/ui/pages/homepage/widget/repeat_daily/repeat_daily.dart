@@ -10,8 +10,8 @@ class RepeatDaily extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(alarmTimeControllerProvider.notifier);
-    final state = ref.watch(alarmTimeControllerProvider);
+    final controller = ref.read(alarmControllerProvider.notifier);
+    final state = ref.watch(alarmControllerProvider);
 
     return AppSwitch(
         label: context.text.repeat_daily,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'app_text_extension.dart';
 import 'app_typography.dart';
 
 class AppTheme {
@@ -13,7 +12,8 @@ class AppTheme {
         textTheme: defaultTheme.textTheme.copyWith(
           // Note: Default text style for Text widget.
           bodyMedium: AppTypography.bodyMedium.copyWith(color: textColor),
-          titleMedium: AppTypography.title.copyWith(color: textColor),
+          titleMedium: AppTypography.titleMedium.copyWith(color: textColor),
+          labelMedium: AppTypography.labelMedium.copyWith(color: lightAppColors.onPrimary),
         ));
   }();
 
@@ -26,7 +26,8 @@ class AppTheme {
         textTheme: defaultTheme.textTheme.copyWith(
           // Note: Default text style for Text widget.
           bodyMedium: AppTypography.bodyMedium.copyWith(color: textColor),
-          titleMedium: AppTypography.title.copyWith(color: textColor),
+          titleMedium: AppTypography.titleMedium.copyWith(color: textColor),
+          labelMedium: AppTypography.labelMedium.copyWith(color: darkAppColors.onPrimary),
         ));
   }();
 
@@ -44,12 +45,6 @@ class AppTheme {
     onSurface: Color(0xFF121212),
   );
 
-  static final lightTextTheme = AppTextThemeExtension(
-    bodyMedium:
-        AppTypography.bodyMedium.copyWith(color: const Color(0xFF121212)),
-    titleMedium: AppTypography.title.copyWith(color: const Color(0xFF121212)),
-  );
-
   static const darkAppColors = ColorScheme(
     brightness: Brightness.dark,
     primary: Color(0xFFF5D126),
@@ -62,11 +57,5 @@ class AppTheme {
     onBackground: Color(0xFFFFFFFF),
     surface: Color(0xFF121212),
     onSurface: Color(0xFFFFFFFF),
-  );
-
-  static final darkTextTheme = AppTextThemeExtension(
-    bodyMedium:
-        AppTypography.bodyMedium.copyWith(color: const Color(0xFFFFFFFF)),
-    titleMedium: AppTypography.title.copyWith(color: const Color(0xFFFFFFFF)),
   );
 }

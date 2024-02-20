@@ -189,6 +189,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Gotowe`
+  String get done {
+    return Intl.message(
+      'Gotowe',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "at_sunrise":
             MessageLookupByLibrary.simpleMessage("O wschodzie słońca"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Ciemny motyw"),
+        "done": MessageLookupByLibrary.simpleMessage("Gotowe"),
         "friday": MessageLookupByLibrary.simpleMessage("PT"),
         "half_hour_before":
             MessageLookupByLibrary.simpleMessage("30 minut przed"),

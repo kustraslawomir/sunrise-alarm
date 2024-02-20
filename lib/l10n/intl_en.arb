@@ -6,11 +6,12 @@
   "at_sunrise": "At Sunrise",
   "half_hour_before": "30 Minutes Before",
   "repeat_daily": "Repeat daily",
-  "monday" : "MON",
-  "tuesday" : "TUE",
-  "wednesday" :  "WED",
-  "thursday" : "THU",
-  "friday" :  "FRI",
-  "saturday" : "SAT",
-  "sunday" :  "SUN"
+  "monday": "MON",
+  "tuesday": "TUE",
+  "wednesday": "WED",
+  "thursday": "THU",
+  "friday": "FRI",
+  "saturday": "SAT",
+  "sunday": "SUN",
+  "done": "Done"
 }
