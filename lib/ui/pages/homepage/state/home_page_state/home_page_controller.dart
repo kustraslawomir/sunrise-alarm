@@ -22,12 +22,11 @@ class HomePageController extends _$HomePageController {
   HomePageState build() => HomePageState.empty();
 
   void initialize() async {
+    state = state.copyWith(isLoading: true);
     final position = await currentPositionUseCase.determinePosition();
     final sunriseDate = await getSunriseDateUseCase.invoke(position);
     final cityName = await geocodingUseCase.fetchCityName(position);
     state = state.copyWith(
-      localSunriseDate: sunriseDate,
-      location: cityName
-    );
+        localSunriseDate: sunriseDate, location: cityName, isLoading: false);
   }
 }

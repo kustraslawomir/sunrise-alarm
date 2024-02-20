@@ -6,6 +6,7 @@ import 'package:sunrise.alarm/ui/pages/homepage/widget/alarm_time/alarm_time_rad
 import 'package:sunrise.alarm/ui/pages/homepage/widget/app_bar/app_bar_title.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/sunrise_time_description/sunrise_time_description.dart';
 import 'package:sunrise.alarm/ui/theme/app_theme_extensions.dart';
+import 'package:sunrise.alarm/ui/widgets/loading_page.dart';
 
 import '../../../generated/l10n.dart';
 import '../../theme/dimensions.dart';
@@ -31,6 +32,10 @@ class HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(homePageControllerProvider);
+    if (state.isLoading) {
+      return LoadingPage();
+    }
     return Scaffold(
         appBar: AppBar(centerTitle: true, title: const AppBarTitle()),
         drawer: const Drawer(child: DrawerPage()),
@@ -38,7 +43,7 @@ class HomePageState extends ConsumerState<HomePage> {
             padding: EdgeInsets.all(Dimensions.appPadding),
             child: Center(
                 child: Column(
-              children: [SunriseTimeDescription(), AlarmTimeRadioGroup()],
-            ))));
+                  children: [SunriseTimeDescription(), AlarmTimeRadioGroup()],
+                ))));
   }
 }

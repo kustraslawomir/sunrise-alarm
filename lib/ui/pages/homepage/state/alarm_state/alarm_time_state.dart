@@ -1,1 +1,3 @@
 enum AlarmTimeState { atSunrise, halfHourBeforeTheSunrise }
+
+
