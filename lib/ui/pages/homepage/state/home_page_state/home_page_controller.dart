@@ -19,7 +19,7 @@ class HomePageController extends _$HomePageController {
       ref.read(getSunriseDateUseCaseProvider);
 
   @override
-  HomePageState build() => HomePageState.empty();
+  HomePageState build() => HomePageState.defaultState();
 
   void initialize() async {
     state = state.copyWith(isLoading: true);

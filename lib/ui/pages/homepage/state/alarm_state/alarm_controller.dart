@@ -1,15 +1,16 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/model/alarm_schedule.dart';
 
-import 'alarm_time_state.dart';
+import 'model/alarm_time_state.dart';
 
 part 'alarm_controller.g.dart';
 
 @riverpod
 class AlarmTimeController extends _$AlarmTimeController {
   @override
-  AlarmTimeState build() => AlarmTimeState.atSunrise;
+  AlarmState build() => AlarmState.defaultState();
 
-  setState(AlarmTimeState state) {
-    this.state = state;
+  setAlarmSchedule(AlarmSchedule alarmSchedule) {
+    state = state.copyWith(alarmSchedule: alarmSchedule);
   }
 }

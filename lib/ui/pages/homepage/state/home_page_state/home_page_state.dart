@@ -12,7 +12,7 @@ class HomePageState {
       required this.location,
       required this.isLoading});
 
-  static empty() =>
+  static defaultState() =>
       HomePageState(localSunriseDate: null, location: null, isLoading: false);
 
   HomePageState copyWith(

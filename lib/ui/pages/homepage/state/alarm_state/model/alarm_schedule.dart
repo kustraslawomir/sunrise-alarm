@@ -1,0 +1,1 @@
+enum AlarmSchedule { atSunrise, halfHourBeforeTheSunrise }
