@@ -31,8 +31,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_name": MessageLookupByLibrary.simpleMessage("Sunrise Alarm"),
         "at_sunrise": MessageLookupByLibrary.simpleMessage("At Sunrise"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark mode"),
+        "friday": MessageLookupByLibrary.simpleMessage("FRI"),
         "half_hour_before":
             MessageLookupByLibrary.simpleMessage("30 Minutes Before"),
-        "todays_sunrise_description": m1
+        "monday": MessageLookupByLibrary.simpleMessage("MON"),
+        "repeat_daily": MessageLookupByLibrary.simpleMessage("Repeat daily"),
+        "saturday": MessageLookupByLibrary.simpleMessage("SAT"),
+        "sunday": MessageLookupByLibrary.simpleMessage("SUN"),
+        "thursday": MessageLookupByLibrary.simpleMessage("THU"),
+        "todays_sunrise_description": m1,
+        "tuesday": MessageLookupByLibrary.simpleMessage("TUE"),
+        "wednesday": MessageLookupByLibrary.simpleMessage("WED")
       };
 }

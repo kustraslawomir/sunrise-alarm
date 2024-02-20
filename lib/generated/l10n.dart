@@ -109,6 +109,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Powtarzaj codziennie`
+  String get repeat_daily {
+    return Intl.message(
+      'Powtarzaj codziennie',
+      name: 'repeat_daily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PON`
+  String get monday {
+    return Intl.message(
+      'PON',
+      name: 'monday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WT`
+  String get tuesday {
+    return Intl.message(
+      'WT',
+      name: 'tuesday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ŚR`
+  String get wednesday {
+    return Intl.message(
+      'ŚR',
+      name: 'wednesday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CZW`
+  String get thursday {
+    return Intl.message(
+      'CZW',
+      name: 'thursday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PT`
+  String get friday {
+    return Intl.message(
+      'PT',
+      name: 'friday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SO`
+  String get saturday {
+    return Intl.message(
+      'SO',
+      name: 'saturday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ND`
+  String get sunday {
+    return Intl.message(
+      'ND',
+      name: 'sunday',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

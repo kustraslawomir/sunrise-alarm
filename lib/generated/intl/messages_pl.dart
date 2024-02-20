@@ -32,8 +32,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "at_sunrise":
             MessageLookupByLibrary.simpleMessage("O wschodzie słońca"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Ciemny motyw"),
+        "friday": MessageLookupByLibrary.simpleMessage("PT"),
         "half_hour_before":
             MessageLookupByLibrary.simpleMessage("30 minut przed"),
-        "todays_sunrise_description": m1
+        "monday": MessageLookupByLibrary.simpleMessage("PON"),
+        "repeat_daily":
+            MessageLookupByLibrary.simpleMessage("Powtarzaj codziennie"),
+        "saturday": MessageLookupByLibrary.simpleMessage("SO"),
+        "sunday": MessageLookupByLibrary.simpleMessage("ND"),
+        "thursday": MessageLookupByLibrary.simpleMessage("CZW"),
+        "todays_sunrise_description": m1,
+        "tuesday": MessageLookupByLibrary.simpleMessage("WT"),
+        "wednesday": MessageLookupByLibrary.simpleMessage("ŚR")
       };
 }
