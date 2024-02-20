@@ -29,7 +29,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "am": m0,
         "app_name": MessageLookupByLibrary.simpleMessage("Sunrise Alarm"),
+        "at_sunrise":
+            MessageLookupByLibrary.simpleMessage("O wschodzie słońca"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Ciemny motyw"),
+        "half_hour_before":
+            MessageLookupByLibrary.simpleMessage("30 minut przed"),
         "todays_sunrise_description": m1
       };
 }

@@ -2,5 +2,7 @@
   "app_name": "Sunrise Alarm",
   "dark_mode": "Dark mode",
   "todays_sunrise_description": "Today's sunrise in {location} is at {time} AM",
-  "am": "{time} AM"
+  "am": "{time} AM",
+  "at_sunrise": "At Sunrise",
+  "half_hour_before": "30 Minutes Before"
 }

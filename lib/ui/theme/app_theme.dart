@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sunrise.alarm/ui/theme/app_colors_extension.dart';
 
 import 'app_text_extension.dart';
 import 'app_typography.dart';

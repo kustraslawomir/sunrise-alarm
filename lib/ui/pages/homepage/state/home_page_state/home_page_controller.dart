@@ -2,7 +2,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrise.alarm/domain/usecase/sunrise/get_sunrise_date_use_case.dart';
 import 'package:sunrise.alarm/domain/usecase/location/current_position_use_case.dart';
 import 'package:sunrise.alarm/domain/usecase/location/geocoding_use_case.dart';
-import 'package:sunrise.alarm/ui/pages/homepage/state/home_page_state.dart';
+
+import 'home_page_state.dart';
 
 part 'home_page_controller.g.dart';
 

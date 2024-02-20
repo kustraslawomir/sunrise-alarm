@@ -89,6 +89,26 @@ class S {
       args: [time],
     );
   }
+
+  /// `O wschodzie słońca`
+  String get at_sunrise {
+    return Intl.message(
+      'O wschodzie słońca',
+      name: 'at_sunrise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `30 minut przed`
+  String get half_hour_before {
+    return Intl.message(
+      '30 minut przed',
+      name: 'half_hour_before',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sunrise.alarm/domain/usecase/datetime/date_time_formatter.dart';
 import 'package:sunrise.alarm/ui/theme/app_theme_extensions.dart';
 
-import '../state/home_page_controller.dart';
+import '../../state/home_page_state/home_page_controller.dart';
 
 class SunriseTimeDescription extends ConsumerWidget {
   const SunriseTimeDescription({super.key});
