@@ -13,5 +13,7 @@
   "friday": "FRI",
   "saturday": "SAT",
   "sunday": "SUN",
-  "done": "Done"
+  "done": "Done",
+  "wake_up_title": "Good morning!",
+  "wake_up_description": "Rise and shine!"
 }

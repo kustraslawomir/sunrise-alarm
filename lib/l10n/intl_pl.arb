@@ -13,5 +13,7 @@
   "friday": "PT",
   "saturday": "SO",
   "sunday": "ND",
-  "done": "Gotowe"
+  "done": "Gotowe",
+  "wake_up_title": "Dzień dobry!",
+  "wake_up_description": "Miłego dnia"
 }

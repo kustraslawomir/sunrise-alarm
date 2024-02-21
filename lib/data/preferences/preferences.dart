@@ -15,13 +15,33 @@ class Preferences {
     prefs.setBool(PreferencesKeys.isDarkModeEnabled, value);
   }
 
+  Future<bool> containsAlarmCount() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.containsKey(PreferencesKeys.alarmCount);
+  }
+
+  setAlarmCount(int value) async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setInt(PreferencesKeys.alarmCount, value);
+  }
+
   Future<bool> isDarkModeEnabled() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.getBool(PreferencesKeys.isDarkModeEnabled) ?? false;
   }
 
+  Future<int> getAlarmCount() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getInt(PreferencesKeys.alarmCount) ?? 0;
+  }
+
   Future<bool> isDarkModeSet() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.containsKey(PreferencesKeys.isDarkModeEnabled);
+  }
+
+  reload() async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.reload();
   }
 }

@@ -6,15 +6,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'geocoding_use_case.g.dart';
 
 @riverpod
-GeocodingUseCase geocodingUseCase(GeocodingUseCaseRef ref) => GeocodingUseCase(ref);
+GeocodingUseCase geocodingUseCase(GeocodingUseCaseRef ref) =>
+    GeocodingUseCase(ref);
 
 class GeocodingUseCase {
-
   final GeocodingUseCaseRef ref;
 
   GeocodingUseCase(this.ref);
 
-  Future<String?> fetchCityName(Position position) async {
+  Future<String?> fetchAddress(Position position) async {
     try {
       List<Placemark> data = await placemarkFromCoordinates(
         position.latitude,
@@ -22,7 +22,8 @@ class GeocodingUseCase {
       );
       final address = data[0];
       debugPrint("$address");
-      final positionAddress = "${address.country} ${address.administrativeArea}";
+      final positionAddress =
+          "${address.country} ${address.administrativeArea}";
       debugPrint('return $positionAddress');
       return Future.value(positionAddress);
     } catch (err) {

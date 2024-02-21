@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "thursday": MessageLookupByLibrary.simpleMessage("THU"),
         "todays_sunrise_description": m1,
         "tuesday": MessageLookupByLibrary.simpleMessage("TUE"),
+        "wake_up_description":
+            MessageLookupByLibrary.simpleMessage("Rise and shine!"),
+        "wake_up_title": MessageLookupByLibrary.simpleMessage("Good morning!"),
         "wednesday": MessageLookupByLibrary.simpleMessage("WED")
       };
 }

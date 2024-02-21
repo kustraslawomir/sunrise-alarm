@@ -199,6 +199,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Dzień dobry!`
+  String get wake_up_title {
+    return Intl.message(
+      'Dzień dobry!',
+      name: 'wake_up_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Miłego dnia`
+  String get wake_up_description {
+    return Intl.message(
+      'Miłego dnia',
+      name: 'wake_up_description',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
