@@ -9,14 +9,13 @@ class SunriseTimeDescription extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(alarmControllerProvider);
-    final address = state.address;
     final sunriseDateTime = state.sunriseDateTime;
-    if (sunriseDateTime == null || address == null) {
+    if (sunriseDateTime == null) {
       return const SizedBox.shrink();
     }
     return Text(
-        context.text
-            .todays_sunrise_description(address, state.localSunriseDateHHmm()),
+        context.text.tomorrows_sunrise_at_your_location_description(
+            state.localSunriseDateHHmm()),
         style: context.theme.textTheme.titleMedium);
   }
 }

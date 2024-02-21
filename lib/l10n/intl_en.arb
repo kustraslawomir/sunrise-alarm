@@ -1,7 +1,8 @@
 {
   "app_name": "Sunrise Alarm",
   "dark_mode": "Dark mode",
-  "todays_sunrise_description": "Today's sunrise in {location} is at {time} AM",
+  "tomorrows_sunrise_description": "Tomorrow's sunrise in {location} is at {time} AM",
+  "tomorrows_sunrise_at_your_location_description": "Tomorrow's sunrise in your location will starts at {time} AM",
   "am": "{time} AM",
   "at_sunrise": "At Sunrise",
   "half_hour_before": "30 Minutes Before",
@@ -15,5 +16,6 @@
   "sunday": "SUN",
   "done": "Done",
   "wake_up_title": "Good morning!",
-  "wake_up_description": "Rise and shine!"
+  "wake_up_description": "Rise and shine!",
+  "wake_me_up_title": "Wake me at:"
 }

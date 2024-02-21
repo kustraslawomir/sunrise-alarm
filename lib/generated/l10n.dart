@@ -70,13 +70,23 @@ class S {
     );
   }
 
-  /// `Dzisiejszy wschód słońca w {location} zacznie się o {time}`
-  String todays_sunrise_description(Object location, Object time) {
+  /// `Jutrzejszy wschód słońca w {location} zacznie się o {time}`
+  String tomorrows_sunrise_description(Object location, Object time) {
     return Intl.message(
-      'Dzisiejszy wschód słońca w $location zacznie się o $time',
-      name: 'todays_sunrise_description',
+      'Jutrzejszy wschód słońca w $location zacznie się o $time',
+      name: 'tomorrows_sunrise_description',
       desc: '',
       args: [location, time],
+    );
+  }
+
+  /// `Jutrzejszy wschód słońca w twojej lokalizacji zacznie się o {time}`
+  String tomorrows_sunrise_at_your_location_description(Object time) {
+    return Intl.message(
+      'Jutrzejszy wschód słońca w twojej lokalizacji zacznie się o $time',
+      name: 'tomorrows_sunrise_at_your_location_description',
+      desc: '',
+      args: [time],
     );
   }
 
@@ -215,6 +225,16 @@ class S {
     return Intl.message(
       'Miłego dnia',
       name: 'wake_up_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Obudź mnie:`
+  String get wake_me_up_title {
+    return Intl.message(
+      'Obudź mnie:',
+      name: 'wake_me_up_title',
       desc: '',
       args: [],
     );

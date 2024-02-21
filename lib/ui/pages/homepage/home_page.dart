@@ -50,7 +50,7 @@ class HomePageState extends ConsumerState<HomePage> {
             child: Center(
                 child: Column(children: [
               const SunriseTimeDescription(),
-              const VerticalSpacing(),
+              const VerticalSpacing(size: VerticalSpacingSize.large),
               const AlarmTimeRadioGroup(),
               const VerticalSpacing(),
               const RepeatDaily(),

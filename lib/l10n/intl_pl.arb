@@ -1,7 +1,8 @@
 {
   "app_name": "Sunrise Alarm",
   "dark_mode": "Ciemny motyw",
-  "todays_sunrise_description": "Dzisiejszy wschód słońca w {location} zacznie się o {time}",
+  "tomorrows_sunrise_description": "Jutrzejszy wschód słońca w {location} zacznie się o {time}",
+  "tomorrows_sunrise_at_your_location_description": "Jutrzejszy wschód słońca w twojej lokalizacji zacznie się o {time}",
   "am": "{time}",
   "at_sunrise": "O wschodzie słońca",
   "half_hour_before": "30 minut przed",
@@ -15,5 +16,6 @@
   "sunday": "ND",
   "done": "Gotowe",
   "wake_up_title": "Dzień dobry!",
-  "wake_up_description": "Miłego dnia"
+  "wake_up_description": "Miłego dnia",
+  "wake_me_up_title": "Obudź mnie:"
 }

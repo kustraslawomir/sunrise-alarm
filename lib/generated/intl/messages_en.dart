@@ -22,8 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(time) => "${time} AM";
 
-  static String m1(location, time) =>
-      "Today\'s sunrise in ${location} is at ${time} AM";
+  static String m1(time) =>
+      "Tomorrow\'s sunrise in your location will starts at ${time} AM";
+
+  static String m2(location, time) =>
+      "Tomorrow\'s sunrise in ${location} is at ${time} AM";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -40,8 +43,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "saturday": MessageLookupByLibrary.simpleMessage("SAT"),
         "sunday": MessageLookupByLibrary.simpleMessage("SUN"),
         "thursday": MessageLookupByLibrary.simpleMessage("THU"),
-        "todays_sunrise_description": m1,
+        "tomorrows_sunrise_at_your_location_description": m1,
+        "tomorrows_sunrise_description": m2,
         "tuesday": MessageLookupByLibrary.simpleMessage("TUE"),
+        "wake_me_up_title": MessageLookupByLibrary.simpleMessage("Wake me at:"),
         "wake_up_description":
             MessageLookupByLibrary.simpleMessage("Rise and shine!"),
         "wake_up_title": MessageLookupByLibrary.simpleMessage("Good morning!"),
