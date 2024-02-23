@@ -31,7 +31,7 @@ class ThemeModeController extends _$ThemeModeController {
     Preferences.instance.enableDarkMode(isDarkModeEnabled);
   }
 
-  void setState(bool isDarkModeEnabled) {
+  setState(bool isDarkModeEnabled) {
     debugPrint("is dark mode enabled: $isDarkModeEnabled");
     if (isDarkModeEnabled) {
       state = ThemeMode.dark;

@@ -36,9 +36,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "friday": MessageLookupByLibrary.simpleMessage("FRI"),
+        "half_hour_after":
+            MessageLookupByLibrary.simpleMessage("30 Minutes After"),
         "half_hour_before":
             MessageLookupByLibrary.simpleMessage("30 Minutes Before"),
         "monday": MessageLookupByLibrary.simpleMessage("MON"),
+        "only_once": MessageLookupByLibrary.simpleMessage("Only once"),
         "repeat_daily": MessageLookupByLibrary.simpleMessage("Repeat daily"),
         "saturday": MessageLookupByLibrary.simpleMessage("SAT"),
         "sunday": MessageLookupByLibrary.simpleMessage("SUN"),

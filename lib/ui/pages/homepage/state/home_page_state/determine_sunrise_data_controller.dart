@@ -9,8 +9,8 @@ import 'package:sunrise.alarm/ui/pages/homepage/state/home_page_state/determine_
 part 'determine_sunrise_data_controller.g.dart';
 
 @riverpod
-class DeterminesSunriseDataController extends _$DeterminesSunriseDataController {
-
+class DeterminesSunriseDataController
+    extends _$DeterminesSunriseDataController {
   @override
   DetermineSunriseDataState build() => DetermineSunriseDataState.defaultState();
 
@@ -31,7 +31,8 @@ class DeterminesSunriseDataController extends _$DeterminesSunriseDataController 
           result) async {
     state = state.copyWith(isLoading: true);
     final position = await currentPositionUseCase.determinePosition();
-    final sunriseDateTime = await getSunriseDateUseCase.invoke(position);
+    final sunriseDateTime =
+        await getSunriseDateUseCase.invoke(position, DateTime.now());
     final address = await geocodingUseCase.fetchAddress(position);
     result(
         position: position, sunriseDateTime: sunriseDateTime, address: address);

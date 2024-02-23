@@ -120,6 +120,16 @@ class S {
     );
   }
 
+  /// `30 minut po`
+  String get half_hour_after {
+    return Intl.message(
+      '30 minut po',
+      name: 'half_hour_after',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Powtarzaj codziennie`
   String get repeat_daily {
     return Intl.message(
@@ -235,6 +245,16 @@ class S {
     return Intl.message(
       'Obudź mnie:',
       name: 'wake_me_up_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tylko raz`
+  String get only_once {
+    return Intl.message(
+      'Tylko raz',
+      name: 'only_once',
       desc: '',
       args: [],
     );

@@ -8,40 +8,33 @@ class Preferences {
 
   static Preferences get instance => _instance;
 
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late SharedPreferences _prefs;
 
-  enableDarkMode(bool value) async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.setBool(PreferencesKeys.isDarkModeEnabled, value);
-  }
-
-  Future<bool> containsAlarmCount() async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.containsKey(PreferencesKeys.alarmCount);
-  }
-
-  setAlarmCount(int value) async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.setInt(PreferencesKeys.alarmCount, value);
-  }
-
-  Future<bool> isDarkModeEnabled() async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.getBool(PreferencesKeys.isDarkModeEnabled) ?? false;
-  }
-
-  Future<int> getAlarmCount() async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.getInt(PreferencesKeys.alarmCount) ?? 0;
-  }
-
-  Future<bool> isDarkModeSet() async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.containsKey(PreferencesKeys.isDarkModeEnabled);
+  initialize() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 
   reload() async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.reload();
+    _prefs.reload();
+  }
+
+  enableDarkMode(bool value) async {
+    _prefs.setBool(PreferencesKeys.isDarkModeEnabled, value);
+  }
+
+  Future<bool> isDarkModeEnabled() async {
+    return _prefs.getBool(PreferencesKeys.isDarkModeEnabled) ?? false;
+  }
+
+  Future<bool> isDarkModeSet() async {
+    return _prefs.containsKey(PreferencesKeys.isDarkModeEnabled);
+  }
+
+  setLastAlarmDate(String value) async {
+    _prefs.setString(PreferencesKeys.lastAlarmDate, value);
+  }
+
+  Future<String?> getLastAlarmDate() async {
+    return _prefs.getString(PreferencesKeys.lastAlarmDate);
   }
 }

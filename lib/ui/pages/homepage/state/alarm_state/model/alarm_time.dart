@@ -1,1 +1,1 @@
-enum AlarmTime { atSunrise, halfHourBeforeTheSunrise }
+enum AlarmMoment { atSunrise, halfHourBeforeTheSunrise, halfHourAfterTheSunrise }

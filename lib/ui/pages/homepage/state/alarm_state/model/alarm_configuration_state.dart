@@ -5,7 +5,7 @@ import 'alarm_time.dart';
 import 'day.dart';
 
 class AlarmConfigurationState {
-  final AlarmTime alarmTime;
+  final AlarmMoment alarmMoment;
   final bool repeatDaily;
   final List<DayOfWeek> schedule;
   final bool isLoading;
@@ -14,7 +14,7 @@ class AlarmConfigurationState {
   final String? address;
 
   AlarmConfigurationState(
-      {required this.alarmTime,
+      {required this.alarmMoment,
       required this.repeatDaily,
       required this.schedule,
       required this.isLoading,
@@ -23,7 +23,7 @@ class AlarmConfigurationState {
       required this.address});
 
   static defaultState() => AlarmConfigurationState(
-      alarmTime: AlarmTime.atSunrise,
+      alarmMoment: AlarmMoment.atSunrise,
       repeatDaily: true,
       schedule: DayOfWeek.values,
       isLoading: false,
@@ -32,7 +32,7 @@ class AlarmConfigurationState {
       address: null);
 
   AlarmConfigurationState copyWith({
-    AlarmTime? alarmTime,
+    AlarmMoment? alarmTime,
     bool? repeatDaily,
     List<DayOfWeek>? schedule,
     bool? isLoading,
@@ -41,7 +41,7 @@ class AlarmConfigurationState {
     String? address,
   }) {
     return AlarmConfigurationState(
-      alarmTime: alarmTime ?? this.alarmTime,
+      alarmMoment: alarmTime ?? this.alarmMoment,
       repeatDaily: repeatDaily ?? this.repeatDaily,
       schedule: schedule ?? this.schedule,
       isLoading: isLoading ?? this.isLoading,

@@ -6,6 +6,7 @@
   "am": "{time} AM",
   "at_sunrise": "At Sunrise",
   "half_hour_before": "30 Minutes Before",
+  "half_hour_after": "30 Minutes After",
   "repeat_daily": "Repeat daily",
   "monday": "MON",
   "tuesday": "TUE",
@@ -17,5 +18,6 @@
   "done": "Done",
   "wake_up_title": "Good morning!",
   "wake_up_description": "Rise and shine!",
-  "wake_me_up_title": "Wake me at:"
+  "wake_me_up_title": "Wake me at:",
+  "only_once": "Only once"
 }

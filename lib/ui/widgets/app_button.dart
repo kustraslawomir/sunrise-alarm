@@ -11,7 +11,7 @@ class AppButton extends StatelessWidget {
   const AppButton(
       {super.key,
       required this.label,
-      required this.isEnabled,
+      this.isEnabled = true,
       required this.onTap});
 
   @override

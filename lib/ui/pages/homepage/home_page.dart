@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_alarm_background_trigger/flutter_alarm_background_trigger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:sunrise.alarm/domain/usecase/sunrise/app_logger.dart';
 import 'package:sunrise.alarm/ui/pages/drawer/drawer_page.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/alarm_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/home_page_state/determine_sunrise_data_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/alarm_schedule/alarm_schedule.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/set_alarm/set_alarm_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/spacing/vertical_spacing.dart';
+import 'package:sunrise.alarm/ui/widgets/app_button.dart';
 import 'package:sunrise.alarm/ui/widgets/loading_page.dart';
 
 import '../../theme/dimensions.dart';
+import '../wake_up/alarm_service.dart';
+import '../wake_up/wake_up_page.dart';
 import 'widget/alarm_time/alarm_time_radio_group.dart';
 import 'widget/app_bar/app_bar_title.dart';
 import 'widget/repeat_daily/repeat_daily.dart';
@@ -33,13 +39,22 @@ class HomePageState extends ConsumerState<HomePage> {
           ref.read(determinesSunriseDataControllerProvider.notifier);
       controller.determineSunriseData(_setSunriseData);
     });
+
+    _reloadAlarmsOnAppResume();
+
+    AlarmService.instance.onForegroundAlarmEventHandler((alarmItem) {
+      Future.delayed(const Duration(seconds: 3), () {
+        _reloadAlarms();
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(determinesSunriseDataControllerProvider);
-    final alarmState = ref.watch(alarmControllerProvider);
-    if (state.isLoading) {
+    final determineSunriseDataState =
+        ref.watch(determinesSunriseDataControllerProvider);
+    final alarmConfigState = ref.watch(alarmControllerProvider);
+    if (determineSunriseDataState.isLoading) {
       return const LoadingPage();
     }
     return Scaffold(
@@ -54,9 +69,17 @@ class HomePageState extends ConsumerState<HomePage> {
               const AlarmTimeRadioGroup(),
               const VerticalSpacing(),
               const RepeatDaily(),
-              if (!alarmState.repeatDaily) const VerticalSpacing(),
-              if (!alarmState.repeatDaily) const AlarmSchedule(),
+              if (!alarmConfigState.repeatDaily) const VerticalSpacing(),
+              if (!alarmConfigState.repeatDaily) const AlarmSchedule(),
               const Spacer(),
+              AppButton(
+                  label: "Open wake up page",
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+
+                        builder: (context) => WakeUpPage(
+                            alarmItem: AlarmItem(time: DateTime.now()))));
+                  }),
               const SetAlarmButton()
             ]))));
   }
@@ -67,5 +90,42 @@ class HomePageState extends ConsumerState<HomePage> {
     controller.setAlarmPosition(position);
     controller.setSunriseDateTime(sunriseDateTime);
     controller.setAddress(address);
+  }
+
+  _reloadAlarms() async {
+    final allAlarms = await AlarmService.instance.getAllAlarms();
+    for (var element in allAlarms) {
+      AppLogger.instance.logger.i(
+          "Alarm on: ${element.time?.toString()} has ${element.status.name} status.");
+    }
+    final doneAlarms =
+        allAlarms.where((element) => element.status == AlarmStatus.DONE);
+
+    if (doneAlarms.isEmpty) {
+      return;
+    }
+
+    for (var doneAlarm in doneAlarms) {
+      await AlarmService.instance.deleteAlarm(doneAlarm.id!);
+    }
+    _pushWakeUpPage(doneAlarms.first);
+  }
+
+  void _reloadAlarmsOnAppResume() {
+    SystemChannels.lifecycle.setMessageHandler((state) {
+      debugPrint('App lifecycle state: $state');
+      if (state == AppLifecycleState.resumed.toString()) {
+        _reloadAlarms();
+      }
+
+      return Future.value(state);
+    });
+  }
+
+  Future<dynamic> _pushWakeUpPage(AlarmItem alarmItem) {
+    final alarmController = ref.read(alarmControllerProvider.notifier);
+    alarmController.storeLastAlarmDate(alarmItem.time);
+    return Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => WakeUpPage(alarmItem: alarmItem)));
   }
 }

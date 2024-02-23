@@ -6,20 +6,20 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'get_sunrise_date_use_case.g.dart';
 
 @riverpod
-GetSunriseDateUseCase getSunriseDateUseCase(GetSunriseDateUseCaseRef ref) => GetSunriseDateUseCase(ref);
+GetSunriseDateUseCase getSunriseDateUseCase(GetSunriseDateUseCaseRef ref) =>
+    GetSunriseDateUseCase(ref);
 
 class GetSunriseDateUseCase {
-
   final GetSunriseDateUseCaseRef ref;
 
   GetSunriseDateUseCase(this.ref);
 
-  Future<DateTime> invoke(Position position) async {
+  Future<DateTime> invoke(Position position, DateTime dateTime) async {
     final dayLightLocation =
         DaylightLocation(position.latitude, position.longitude);
     final dayLightCalculator = DaylightCalculator(dayLightLocation);
     final sunriseDateTime = dayLightCalculator
-        .calculateEvent(DateTime.now(), Zenith.official, EventType.sunrise)
+        .calculateEvent(dateTime, Zenith.official, EventType.sunrise)
         ?.toLocal();
     if (sunriseDateTime == null) {
       throw Exception('could\' determine sunrise date time');
