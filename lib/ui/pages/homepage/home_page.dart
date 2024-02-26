@@ -1,18 +1,26 @@
+import 'dart:isolate';
+import 'dart:ui';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_alarm_background_trigger/flutter_alarm_background_trigger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sunrise.alarm/domain/usecase/sunrise/app_logger.dart';
 import 'package:sunrise.alarm/ui/pages/drawer/drawer_page.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/alarm_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/home_page_state/determine_sunrise_data_controller.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/alarm_schedule/alarm_schedule.dart';
+import 'package:sunrise.alarm/ui/pages/homepage/widget/debug/debug_alarm_set.dart';
+import 'package:sunrise.alarm/ui/pages/homepage/widget/debug/debug_wake_up_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/set_alarm/set_alarm_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/spacing/vertical_spacing.dart';
 import 'package:sunrise.alarm/ui/widgets/app_button.dart';
 import 'package:sunrise.alarm/ui/widgets/loading_page.dart';
 
+import '../../../main.dart';
 import '../../theme/dimensions.dart';
 import '../wake_up/alarm_service.dart';
 import '../wake_up/wake_up_page.dart';
@@ -47,6 +55,26 @@ class HomePageState extends ConsumerState<HomePage> {
         _reloadAlarms();
       });
     });
+
+    AndroidAlarmManager.initialize();
+    port.listen((_) async {
+      Future.delayed(const Duration(seconds: 3), () {
+        _reloadAlarms();
+      });
+    });
+  }
+
+  static SendPort? uiSendPort;
+
+  @pragma('vm:entry-point')
+  static Future<void> callback() async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentCount = prefs.getInt(countKey) ?? 0;
+    await prefs.setInt(countKey, currentCount + 1);
+
+    uiSendPort ??= IsolateNameServer.lookupPortByName(isolateName);
+    uiSendPort?.send(null);
+    AppLogger.instance.logger.d('Alarm fired!');
   }
 
   @override
@@ -72,14 +100,8 @@ class HomePageState extends ConsumerState<HomePage> {
               if (!alarmConfigState.repeatDaily) const VerticalSpacing(),
               if (!alarmConfigState.repeatDaily) const AlarmSchedule(),
               const Spacer(),
-              AppButton(
-                  label: "Open wake up page",
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-
-                        builder: (context) => WakeUpPage(
-                            alarmItem: AlarmItem(time: DateTime.now()))));
-                  }),
+              const DebugWakeUpButton(),
+              const DebugAlarmSetButton(),
               const SetAlarmButton()
             ]))));
   }

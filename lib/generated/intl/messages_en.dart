@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_name": MessageLookupByLibrary.simpleMessage("Sunrise Alarm"),
         "at_sunrise": MessageLookupByLibrary.simpleMessage("At Sunrise"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark mode"),
+        "debug_alarm_set":
+            MessageLookupByLibrary.simpleMessage("Set fake alarm!"),
+        "debug_wake_up_page":
+            MessageLookupByLibrary.simpleMessage("Wake me up!"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "friday": MessageLookupByLibrary.simpleMessage("FRI"),
         "half_hour_after":

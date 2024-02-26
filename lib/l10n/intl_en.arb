@@ -19,5 +19,7 @@
   "wake_up_title": "Good morning!",
   "wake_up_description": "Rise and shine!",
   "wake_me_up_title": "Wake me at:",
-  "only_once": "Only once"
+  "only_once": "Only once",
+  "debug_wake_up_page" : "Wake me up!",
+  "debug_alarm_set" : "Set fake alarm!"
 }

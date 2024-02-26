@@ -259,6 +259,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Obudź mnie!`
+  String get debug_wake_up_page {
+    return Intl.message(
+      'Obudź mnie!',
+      name: 'debug_wake_up_page',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ustaw testowy alarm!`
+  String get debug_alarm_set {
+    return Intl.message(
+      'Ustaw testowy alarm!',
+      name: 'debug_alarm_set',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

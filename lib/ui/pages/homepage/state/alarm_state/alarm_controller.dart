@@ -1,10 +1,15 @@
+import 'dart:math';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrise.alarm/data/preferences/preferences.dart';
 import 'package:sunrise.alarm/domain/usecase/sunrise/app_logger.dart';
 import 'package:sunrise.alarm/domain/usecase/sunrise/get_sunrise_date_use_case.dart';
+import 'package:sunrise.alarm/ui/pages/homepage/home_page.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/model/alarm_time.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/model/day.dart';
 import 'package:sunrise.alarm/ui/pages/wake_up/alarm_service.dart';
@@ -16,7 +21,6 @@ part 'alarm_controller.g.dart';
 @riverpod
 class AlarmController extends _$AlarmController {
   static const alarmId = 999;
-  static const androidAlarmManagerId = 888;
 
   @override
   AlarmConfigurationState build() => AlarmConfigurationState.defaultState();
@@ -68,7 +72,7 @@ class AlarmController extends _$AlarmController {
     final currentDateTime = DateTime.now();
     final dateTimeSchedule =
         state.schedule.map((e) => dayOfWeekToDateTimeDayNumber(e)).toList();
-    for (var i = 0; i < 356; i++) {
+    for (var i = 0; i < 365; i++) {
       final tempDateTime = currentDateTime.add(Duration(days: i));
       debugPrint("temp date: ${tempDateTime.toString()}");
       if (dayInSchedule(tempDateTime, dateTimeSchedule)) {
@@ -76,7 +80,7 @@ class AlarmController extends _$AlarmController {
             await getSunriseDateUseCase.invoke(position, tempDateTime);
         switch (state.alarmMoment) {
           case AlarmMoment.atSunrise:
-            //ignore
+            //do nothing
             break;
           case AlarmMoment.halfHourBeforeTheSunrise:
             sunriseDate.add(const Duration(minutes: -30));
@@ -86,8 +90,9 @@ class AlarmController extends _$AlarmController {
             break;
         }
         await _setAlarm(sunriseDate);
-      }else{
-        AppLogger.instance.logger.w("${tempDateTime.day} ${tempDateTime.toString()} is out of schedule. Ignore.");
+      } else {
+        AppLogger.instance.logger.w(
+            "${tempDateTime.day} ${tempDateTime.toString()} is out of schedule. Ignore.");
       }
     }
     state = state.copyWith(isLoading: false);
@@ -99,6 +104,15 @@ class AlarmController extends _$AlarmController {
     await AlarmService.instance.addAlarm(sunriseDateTime,
         uid: packageName, screenWakeDuration: const Duration(minutes: 1));
     AppLogger.instance.logger.d("Set alarm on: ${sunriseDateTime.toString()}");
+
+    await AndroidAlarmManager.oneShotAt(
+      sunriseDateTime,
+      Random().nextInt(pow(2, 31) as int),
+      HomePageState.callback,
+      exact: true,
+      wakeup: true,
+    );
+
     return Future.value(true);
   }
 
@@ -143,5 +157,11 @@ class AlarmController extends _$AlarmController {
       case DayOfWeek.sunday:
         return DateTime.sunday;
     }
+  }
+
+  void setDebugAlarm() {
+    final debugDateTime = DateTime.now();
+    debugDateTime.add(const Duration(seconds: 30));
+    _setAlarm(debugDateTime);
   }
 }

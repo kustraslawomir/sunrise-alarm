@@ -19,5 +19,7 @@
   "wake_up_title": "Dzień dobry!",
   "wake_up_description": "Miłego dnia",
   "wake_me_up_title": "Obudź mnie:",
-  "only_once": "Tylko raz"
+  "only_once": "Tylko raz",
+  "debug_wake_up_page" : "Obudź mnie!",
+  "debug_alarm_set" : "Ustaw testowy alarm!"
 }
