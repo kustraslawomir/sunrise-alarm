@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
@@ -114,12 +112,8 @@ class AlarmController extends _$AlarmController {
     AppLogger.instance.log.d("Set alarm on: ${sunriseDateTime.toString()}");
 
     await AndroidAlarmManager.oneShotAt(
-      sunriseDateTime,
-      Random().nextInt(pow(2, 31) as int),
-      HomePageState.callback,
-      exact: true,
-      wakeup: true,
-    );
+      sunriseDateTime, alarmId, HomePageState.callback,
+        exact: true, wakeup: true, allowWhileIdle: true, alarmClock: true);
 
     return Future.value(true);
   }
