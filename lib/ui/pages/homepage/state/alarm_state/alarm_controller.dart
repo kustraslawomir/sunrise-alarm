@@ -74,11 +74,15 @@ class AlarmController extends _$AlarmController {
     }
 
     state = state.copyWith(isLoading: true);
+
     final getSunriseDateUseCase = ref.read(getSunriseDateUseCaseProvider);
+    final packageInfo = await PackageInfo.fromPlatform();
+    final packageName = packageInfo.packageName;
     await _clearCurrentAlarms();
     final currentDateTime = DateTime.now();
     final dateTimeSchedule =
         state.schedule.map((element) => _dayOfWeekMapper.map(element)).toList();
+
     for (var i = 0; i < 365; i++) {
       final tempDateTime = currentDateTime.add(Duration(days: i));
       if (_dayInSchedule(tempDateTime, dateTimeSchedule)) {
@@ -95,7 +99,7 @@ class AlarmController extends _$AlarmController {
             sunriseDate.add(const Duration(minutes: 30));
             break;
         }
-        await _setAlarm(sunriseDate);
+        await _setAlarm(sunriseDate, packageName);
       } else {
         AppLogger.instance.log.w(
             "${tempDateTime.day} ${tempDateTime.toString()} is out of schedule. Ignore.");
@@ -104,9 +108,7 @@ class AlarmController extends _$AlarmController {
     state = state.copyWith(isLoading: false);
   }
 
-  _setAlarm(DateTime sunriseDateTime) async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String packageName = packageInfo.packageName;
+  _setAlarm(DateTime sunriseDateTime, String packageName) async {
     await AlarmService.instance.addAlarm(sunriseDateTime,
         uid: packageName, screenWakeDuration: const Duration(minutes: 1));
     AppLogger.instance.log.d("Set alarm on: ${sunriseDateTime.toString()}");
@@ -153,9 +155,11 @@ class AlarmController extends _$AlarmController {
         "Incoming alarm date time: ${closestAlarm?.time} ${closestAlarm?.status}");
   }
 
-  void setDebugAlarm() {
+  void setDebugAlarm() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    final packageName = packageInfo.packageName;
     final debugDateTime = DateTime.now();
     debugDateTime.add(const Duration(seconds: 30));
-    _setAlarm(debugDateTime);
+    _setAlarm(debugDateTime, packageName);
   }
 }
