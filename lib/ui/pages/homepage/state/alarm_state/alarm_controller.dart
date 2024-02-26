@@ -13,6 +13,7 @@ import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/model/alarm_ti
 import 'package:sunrise.alarm/ui/pages/homepage/state/alarm_state/model/day.dart';
 import 'package:sunrise.alarm/ui/pages/wake_up/alarm_service.dart';
 
+import '../../../../../domain/usecase/mappers/day_of_week_to_date_time_week_day_mapper.dart';
 import 'model/alarm_configuration_state.dart';
 
 part 'alarm_controller.g.dart';
@@ -20,6 +21,9 @@ part 'alarm_controller.g.dart';
 @riverpod
 class AlarmController extends _$AlarmController {
   static const alarmId = 999;
+
+  final DayOfWeekToDateTimeWeekDayMapper _dayOfWeekMapper =
+      DayOfWeekToDateTimeWeekDayMapper();
 
   AlarmController() {
     debugPrintLastAlarmDate();
@@ -74,10 +78,9 @@ class AlarmController extends _$AlarmController {
     await _clearCurrentAlarms();
     final currentDateTime = DateTime.now();
     final dateTimeSchedule =
-        state.schedule.map((e) => _dayOfWeekToDateTimeDayNumber(e)).toList();
+        state.schedule.map((element) => _dayOfWeekMapper.map(element)).toList();
     for (var i = 0; i < 365; i++) {
       final tempDateTime = currentDateTime.add(Duration(days: i));
-      debugPrint("temp date: ${tempDateTime.toString()}");
       if (_dayInSchedule(tempDateTime, dateTimeSchedule)) {
         final sunriseDate =
             await getSunriseDateUseCase.invoke(position, tempDateTime);
@@ -135,25 +138,6 @@ class AlarmController extends _$AlarmController {
 
   bool _dayInSchedule(DateTime date, List<int> dateTimeSchedule) {
     return dateTimeSchedule.contains(date.weekday);
-  }
-
-  int _dayOfWeekToDateTimeDayNumber(DayOfWeek dayOfWeek) {
-    switch (dayOfWeek) {
-      case DayOfWeek.monday:
-        return DateTime.monday;
-      case DayOfWeek.tuesday:
-        return DateTime.tuesday;
-      case DayOfWeek.wednesday:
-        return DateTime.wednesday;
-      case DayOfWeek.thursday:
-        return DateTime.thursday;
-      case DayOfWeek.friday:
-        return DateTime.friday;
-      case DayOfWeek.saturday:
-        return DateTime.saturday;
-      case DayOfWeek.sunday:
-        return DateTime.sunday;
-    }
   }
 
   debugPrintLastAlarmDate() async {
