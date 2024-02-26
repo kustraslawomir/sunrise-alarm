@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -21,6 +20,10 @@ part 'alarm_controller.g.dart';
 @riverpod
 class AlarmController extends _$AlarmController {
   static const alarmId = 999;
+
+  AlarmController() {
+    debugPrintLastAlarmDate();
+  }
 
   @override
   AlarmConfigurationState build() => AlarmConfigurationState.defaultState();
@@ -71,11 +74,11 @@ class AlarmController extends _$AlarmController {
     await _clearCurrentAlarms();
     final currentDateTime = DateTime.now();
     final dateTimeSchedule =
-        state.schedule.map((e) => dayOfWeekToDateTimeDayNumber(e)).toList();
+        state.schedule.map((e) => _dayOfWeekToDateTimeDayNumber(e)).toList();
     for (var i = 0; i < 365; i++) {
       final tempDateTime = currentDateTime.add(Duration(days: i));
       debugPrint("temp date: ${tempDateTime.toString()}");
-      if (dayInSchedule(tempDateTime, dateTimeSchedule)) {
+      if (_dayInSchedule(tempDateTime, dateTimeSchedule)) {
         final sunriseDate =
             await getSunriseDateUseCase.invoke(position, tempDateTime);
         switch (state.alarmMoment) {
@@ -91,7 +94,7 @@ class AlarmController extends _$AlarmController {
         }
         await _setAlarm(sunriseDate);
       } else {
-        AppLogger.instance.logger.w(
+        AppLogger.instance.log.w(
             "${tempDateTime.day} ${tempDateTime.toString()} is out of schedule. Ignore.");
       }
     }
@@ -103,7 +106,7 @@ class AlarmController extends _$AlarmController {
     String packageName = packageInfo.packageName;
     await AlarmService.instance.addAlarm(sunriseDateTime,
         uid: packageName, screenWakeDuration: const Duration(minutes: 1));
-    AppLogger.instance.logger.d("Set alarm on: ${sunriseDateTime.toString()}");
+    AppLogger.instance.log.d("Set alarm on: ${sunriseDateTime.toString()}");
 
     await AndroidAlarmManager.oneShotAt(
       sunriseDateTime,
@@ -123,12 +126,6 @@ class AlarmController extends _$AlarmController {
     Preferences.instance.setLastAlarmDate(dateTime.toString());
   }
 
-  debugPrintLastAlarmDate() async {
-    Preferences.instance
-        .getLastAlarmDate()
-        .then((value) => debugPrint("Last alarm date: $value"));
-  }
-
   _clearCurrentAlarms() async {
     final alarms = await AlarmService.instance.getAllAlarms();
     for (var element in alarms) {
@@ -136,11 +133,11 @@ class AlarmController extends _$AlarmController {
     }
   }
 
-  bool dayInSchedule(DateTime date, List<int> dateTimeSchedule) {
+  bool _dayInSchedule(DateTime date, List<int> dateTimeSchedule) {
     return dateTimeSchedule.contains(date.weekday);
   }
 
-  int dayOfWeekToDateTimeDayNumber(DayOfWeek dayOfWeek) {
+  int _dayOfWeekToDateTimeDayNumber(DayOfWeek dayOfWeek) {
     switch (dayOfWeek) {
       case DayOfWeek.monday:
         return DateTime.monday;
@@ -157,6 +154,19 @@ class AlarmController extends _$AlarmController {
       case DayOfWeek.sunday:
         return DateTime.sunday;
     }
+  }
+
+  debugPrintLastAlarmDate() async {
+    if (!kDebugMode) {
+      return;
+    }
+    Preferences.instance.getLastAlarmDate().then(
+        (value) => AppLogger.instance.log.d("Last alarm date time: $value"));
+
+    final closestAlarm =
+        (await AlarmService.instance.getAllAlarms()).firstOrNull;
+    AppLogger.instance.log.d(
+        "Incoming alarm date time: ${closestAlarm?.time} ${closestAlarm?.status}");
   }
 
   void setDebugAlarm() {

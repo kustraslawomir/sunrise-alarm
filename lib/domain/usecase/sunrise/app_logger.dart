@@ -7,7 +7,7 @@ class AppLogger {
 
   static AppLogger get instance => _instance;
 
-  var logger = Logger(
+  var log = Logger(
     printer: PrettyPrinter(),
   );
 }

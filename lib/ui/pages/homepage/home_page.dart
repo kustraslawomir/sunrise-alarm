@@ -17,7 +17,6 @@ import 'package:sunrise.alarm/ui/pages/homepage/widget/debug/debug_alarm_set.dar
 import 'package:sunrise.alarm/ui/pages/homepage/widget/debug/debug_wake_up_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/set_alarm/set_alarm_button.dart';
 import 'package:sunrise.alarm/ui/pages/homepage/widget/spacing/vertical_spacing.dart';
-import 'package:sunrise.alarm/ui/widgets/app_button.dart';
 import 'package:sunrise.alarm/ui/widgets/loading_page.dart';
 
 import '../../../main.dart';
@@ -74,7 +73,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
     uiSendPort ??= IsolateNameServer.lookupPortByName(isolateName);
     uiSendPort?.send(null);
-    AppLogger.instance.logger.d('Alarm fired!');
+    AppLogger.instance.log.d('Alarm fired!');
   }
 
   @override
@@ -117,7 +116,7 @@ class HomePageState extends ConsumerState<HomePage> {
   _reloadAlarms() async {
     final allAlarms = await AlarmService.instance.getAllAlarms();
     for (var element in allAlarms) {
-      AppLogger.instance.logger.i(
+      AppLogger.instance.log.i(
           "Alarm on: ${element.time?.toString()} has ${element.status.name} status.");
     }
     final doneAlarms =
